@@ -1,0 +1,71 @@
+### user get all 
+GET http://localhost:3000/api/users
+
+### insert users
+POST http://localhost:3000/api/users
+Content-Type: application/json 
+
+{
+    "username":"test",
+    "password":"test",
+    "role":"user",
+    "email":"test@gmail.com",
+    "phone":"19001900"
+}
+### check user already 
+POST http://localhost:3000/api/users/checkuser
+Content-Type: application/json
+
+{
+    "username":"test"
+}
+
+
+###  user getone 
+GET http://localhost:3000/api/users/getone?username=test2
+
+### user delete
+DELETE http://localhost:3000/api/users/delete/62ef9f4a7050b04d0f81eb07
+
+### user update
+PATCH http://localhost:3000/api/users/update/62b1fd46b8cb4e96e274560a
+
+### user auth
+POST http://localhost:3000/api/users/auth
+Content-Type: application/json
+
+{
+    "username":"test4", 
+    "password":"test2"
+}
+### user register with token
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+
+{
+    "username" : "test1",
+    "password" : "test1",
+    "role" :"user",
+    "email": "test1@gmail.com",
+    "phone": "0123456789"
+}
+
+### user login 
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password" : "test"
+}
+
+### 
+POST http://localhost:3000/api/categories/insert
+Content-Type: application/json
+
+{
+    "title": "có gai"
+}
+
+###
+GET http://localhost:3000/api/categories/getall
