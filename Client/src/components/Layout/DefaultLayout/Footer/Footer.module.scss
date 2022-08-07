@@ -1,0 +1,130 @@
+@import "components/GlobalStyle/mixins.scss";
+
+.wrapper {
+  background-color: var(--footer-background-color);
+
+  .space {
+    height: 100px;
+  }
+  .row {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .col {
+      width: fit-content;
+      padding: 0 10px;
+      margin-bottom: 40px;
+      width: 25%;
+      display: block;
+      transition: all 0.5s;
+
+      @include tablet {
+        width: 50%;
+        padding: 0 20px;
+      }
+      @include mobile {
+        width: 100%;
+      }
+
+      h5 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 30px;
+      }
+
+      ul {
+        display: flex;
+        flex-flow: column;
+
+        li {
+          a {
+            color: var(--third-text-color);
+            transition: color 0.5s;
+            font-weight: 300;
+
+            &:hover {
+              color: var(--primary-color);
+            }
+          }
+
+          & + li {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .summary {
+      .logo {
+        cursor: pointer;
+        width: 210px;
+        display: flex;
+
+        align-items: center;
+
+        .logo-img {
+          height: 80px;
+        }
+
+        .logo-name {
+          font-size: 3rem;
+          font-weight: 700;
+          color: #507c5c; //var(--secondary-text-color);
+          font-family: "Lobster", cursive;
+
+          display: table;
+        }
+      }
+
+      .summary-text {
+        color: var(--third-text-color);
+        line-height: 1.5;
+        margin-bottom: 30px;
+        margin-top: 20px;
+
+        font-weight: 300;
+      }
+      .hotline {
+        color: var(--primary-color);
+        font-weight: 300;
+        font-size: 2rem;
+        margin-bottom: 30px;
+
+        a {
+          text-decoration: none;
+          color: black;
+          font-weight: 500;
+        }
+      }
+      .social-media {
+        display: flex;
+
+        a {
+          color: var(--third-text-color);
+          transition: color 0.5s;
+          font-size: 2.5rem;
+
+          &:hover {
+            color: var(--primary-color);
+          }
+          & + a {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.copy-right {
+  height: 40px;
+
+  font-weight: 100;
+  font-size: 1.4rem;
+  color: aliceblue;
+  background-color: #292929;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

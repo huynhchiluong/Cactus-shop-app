@@ -1,0 +1,51 @@
+.btn {
+  --button-height: 40px;
+  --hover-color: darkolivegreen;
+
+  height: var(--button-height);
+  padding: 0 20px;
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border: 1px solid #ccc;
+
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+
+  + .btn {
+    margin-left: 16px;
+  }
+}
+
+.primary {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  padding: auto;
+
+  &:hover {
+    background: var(--hover-color);
+  }
+}
+
+.outline {
+  border: 3px solid;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+
+  &:hover {
+    border-color: var(--hover-color);
+    color: var(--hover-color);
+  }
+}

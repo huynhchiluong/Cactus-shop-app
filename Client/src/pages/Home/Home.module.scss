@@ -1,0 +1,8 @@
+.wrapper {
+  background-color: #ccc;
+  height: 3000px;
+
+  .carousel {
+    height: calc((100vh) - var(--header-height));
+  }
+}

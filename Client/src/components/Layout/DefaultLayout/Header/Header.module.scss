@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import "~/src/components/GlobalStyle/mixins.scss";
+.wrapper {
+  height: var(--header-height);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 3px 7px -3px var(--header-sticky-box-shadow);
+  position: fixed;
+  background-color: white;
+  z-index: 99;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--container-width);
+
+    .header_left {
+      display: flex;
+
+      .logo {
+        margin-left: 10px;
+        height: calc(var(--header-height) - 40px);
+        display: flex;
+        cursor: pointer;
+
+        .logo-name {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #507c5c; //var(--secondary-text-color);
+          font-family: "Lobster", cursive;
+
+          display: table;
+          margin: auto;
+        }
+      }
+    }
+
+    .header_right {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-right: 10px;
+
+      .toggle {
+        right: calc(var(--header-height) / 3);
+        padding: 0 40px 0 0;
+        z-index: 99;
+
+        color: var(--primary-text-color);
+        font-size: 2.5rem;
+        width: 20px;
+        display: none;
+
+        @include tablet {
+          display: block;
+        }
+      }
+      .menu {
+        height: var(--header-height);
+        justify-self: center;
+        margin: 0;
+        background-color: var(--background-color);
+
+        z-index: 50;
+        top: -100%;
+        transition: top 1s;
+
+        @include tablet {
+          position: fixed;
+          right: 0;
+          width: 100vw;
+          height: 100vh;
+
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .menu_item {
+          list-style: none;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          position: relative;
+
+          .menu_link {
+            height: 100%;
+            padding: 0 15px;
+
+            color: var(--secondary-text-color);
+            font-weight: 500;
+            font-size: 1.8rem;
+
+            display: flex;
+            text-align: center;
+            line-height: var(--header-height);
+            transition: 0.3s;
+
+            &:active {
+              color: var(--secondary-color);
+            }
+          }
+
+          .menu_link-active {
+            color: var(--primary-color);
+          }
+
+          &:hover {
+            color: var(--primary-text-color);
+          }
+
+          &::after {
+            position: absolute;
+            height: 4px;
+            content: attr(data-caption);
+            bottom: 0;
+            width: 0;
+
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: 0.2s all;
+          }
+
+          &:hover::after {
+            display: block;
+            width: 50%;
+
+            @include tablet {
+              width: 20%;
+            }
+          }
+        }
+      }
+      .showMenu-mobile {
+        top: 0;
+      }
+    }
+  }
+  .customize {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    .customize_item {
+      position: relative;
+    }
+
+    .customize_Link {
+      color: var(--secondary-text-color);
+      font-size: 2.2rem;
+      margin: 0 20px 0 20px;
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      cursor: pointer;
+
+      .avt-img {
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        align-self: center;
+
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.07);
+        -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.07);
+        -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.07);
+      }
+
+      .counter {
+        height: 22px;
+        width: 22px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+
+        position: absolute;
+        top: -10px;
+        right: -17px;
+
+        color: var(--white);
+        font-size: 1.2rem;
+        font-weight: 400;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &:hover {
+        color: var(--primary-color);
+        transition: color 0.5s;
+      }
+    }
+  }
+}
+
+.header_visible {
+  top: 0;
+  transition: top 0.4s ease-out;
+}
+
+.header_hidden {
+  top: calc(0px - var(--header-height));
+  transition: top 0.4s ease-out;
+}
