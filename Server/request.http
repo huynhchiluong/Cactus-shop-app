@@ -10,7 +10,8 @@ Content-Type: application/json
     "password":"test",
     "role":"user",
     "email":"test@gmail.com",
-    "phone":"19001900"
+    "phone":19001900,
+    "avatar":"https://res.cloudinary.com/dypuxks73/image/upload/v1661239613/catus/9a09f323c6813110982af84750c97584_egub8u.jpg"
 }
 ### check user already 
 POST http://localhost:3000/api/users/checkuser
@@ -25,7 +26,7 @@ Content-Type: application/json
 GET http://localhost:3000/api/users/getone?username=test2
 
 ### user delete
-DELETE http://localhost:3000/api/users/delete/62ef9f4a7050b04d0f81eb07
+DELETE http://localhost:3000/api/users/delete/62efa4a44a7d00a6063ac70a
 
 ### user update
 PATCH http://localhost:3000/api/users/update/62b1fd46b8cb4e96e274560a
@@ -59,7 +60,7 @@ Content-Type: application/json
     "password" : "test"
 }
 
-### 
+### category insert
 POST http://localhost:3000/api/categories/insert
 Content-Type: application/json
 
@@ -67,5 +68,46 @@ Content-Type: application/json
     "title": "có gai"
 }
 
-###
+### category getall
 GET http://localhost:3000/api/categories/getall
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjEyMzY1NDcsImV4cCI6MTY2MTIzNjU3N30.j3_hM1-0SoPkQk4xgEtWSK07qM-wVzU7E3T6OC6ks8
+
+
+
+### login jwt 
+POST http://localhost:4000/login 
+Content-Type: application/json 
+
+{
+    "username":"test"
+}
+
+###
+POST http://localhost:4000/posts 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjEyMzY1NDcsImV4cCI6MTY2MTIzNjU3N30.j3_hM1-0SoPkQk4xgEtWSK07qM-wVzU7E3T6OC6kss8
+
+
+### 
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjEyMzI2NDJ9.vUc5EGx2tccyTIPR4PoI06y5ZGtJoyM6o5I9_mQWaH0"
+}
+
+
+### logout jwt
+DELETE  http://localhost:4000/logout
+Content-Type:  application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE2NjEyMzI2NDJ9.vUc5EGx2tccyTIPR4PoI06y5ZGtJoyM6o5I9_mQWaH0"
+}
+
+
+### upload image 
+POST http://localhost:3000/api/images/
+Content-Disposition: form-data; name="images"; filename="kimho.jpeg"
+Content-Type: image/jpeg
+
+< ./public/images/kimho.jpeg

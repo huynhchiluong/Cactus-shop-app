@@ -1,0 +1,94 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p> register</p>
+    <form name="form1" method="POST" action="/test">
+        <table>
+            <tr>
+            <td>username</td>
+            <td><input type="text" name="username" ></td>
+            </tr>
+            <tr>
+            <td>password</td>
+            <td><input type="password" name="password" ></td>
+            </tr>
+            <td>role</td>
+            <td><input type="text" name="role" ></td>
+            </tr>
+            <td>email</td>
+            <td><input type="email" name="email" ></td>
+            </tr>
+            <td>phone</td>
+            <td><input type="text" name="phone" ></td>
+            </tr>
+            </tr>
+            <td>avatar</td>
+            <td><input type="file" name="avatar" id="fileUpload"  ></td>
+            </tr>
+            <tr>
+            <td colspan="2"><input type="submit" value="Save" ></td>
+            </tr>
+        </table>
+        </form>
+</body>
+</html>
+
+<script type="text/javascript">
+    function getFilePath(){
+        $('input[type=file]').change(function () {
+        console.log(this.files[0].mozFullPath);
+    });
+    }
+</script> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <h2>Insert User</h2>
+    <form action="/api/users/" method="POST" enctype="multipart/form-data">
+        <div class="field">
+            <label for="title">Username</label>
+            <input type="text" name="title" id="">
+        </div>
+        <div class="field">
+            <label for="title">Password</label>
+            <input type="password" name="title" id="">
+        </div>
+        <div class="field">
+            <label for="title">Role</label>
+            <input type="text" name="title" id="">
+        </div>
+        <div class="field">
+            <label for="title">Email</label>
+            <input type="email" name="title" id="">
+        </div>
+        <div class="field">
+            <label for="title">Phone</label>
+            <input type="number" name="title" id="">
+        </div>
+        <div class="field">
+            <label for="file">File</label>
+            <input type="file" name="img" id="">
+        </div>
+        <div class="field">
+            <input type="submit" >
+        </div>
+    </form>
+    
+
+</body>
+</html>

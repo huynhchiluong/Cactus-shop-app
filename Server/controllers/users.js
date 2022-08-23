@@ -2,6 +2,8 @@ const Users = require("../models/users")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const path = require('path')
+const upload = require("./utils/multer");
+const {cloudinary} = require("./utils/cloudinary");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 module.exports = {
     insert: async function(req,res){
@@ -11,16 +13,17 @@ module.exports = {
             var password = req.body.password;
             const salt = bcrypt.genSaltSync(saltRounds);
             const has_password = bcrypt.hashSync(password, salt);
-            console.log('has_password');
             var email = req.body.email;
             var phone = req.body.phone;
             var role = req.body.role;
+            var avatar = req.body.avatar;
             const users = new Users ({
                 username : username,
                 password : has_password,
                 email : email,
                 phone : phone,
-                role: role
+                role: role,
+                avatar: avatar
             })
             await users.save().then((doc) =>res.status(200).send(doc));
         }catch(error){

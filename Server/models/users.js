@@ -22,6 +22,10 @@ const userSchema = new Schema({
         type: Number,
         required: true,
     },
+    avatar:{
+        type: String,
+        required: true
+    },
     token:{
         type: String,
     }
