@@ -1,0 +1,26 @@
+@import "~/src/components/GlobalStyle/mixins.scss";
+
+.carousel {
+  height: calc(100vh - var(--header-height));
+
+  @include tablet {
+    height: calc(80vh - var(--header-height));
+  }
+  @include mobile {
+    height: calc(50vh - var(--header-height));
+  }
+
+  .img {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    @include tablet {
+      height: calc(80vh - var(--header-height));
+    }
+    @include mobile {
+      height: calc(50vh - var(--header-height));
+      width: fit-content;
+    }
+  }
+}

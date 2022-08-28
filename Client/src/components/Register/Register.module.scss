@@ -1,0 +1,17 @@
+.title {
+  font-size: 2.6rem;
+  margin: 0;
+  padding: 10px;
+  color: var(--primary-color);
+}
+.inputText {
+  height: 30px;
+  font-size: 1.4rem !important;
+
+  &:focus {
+    background-color: var(--background-color) !important;
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 107, 30, 0.25) !important;
+    caret-color: var(--primary-color) !important;
+  }
+}

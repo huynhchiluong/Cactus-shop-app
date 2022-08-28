@@ -9,6 +9,7 @@ const publicRoutes = [
   { path: "/products", component: <Products /> },
   { path: "/aboutus", component: <AboutUs /> },
   { path: "/contact", component: <ContactUs /> },
+  { path: "/login", component: <ContactUs /> },
 ];
 
 //Private routes

@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import style from "./Header.module.scss";
 import logo from "assets/imgs/logo.svg";
 import avt from "assets/imgs/avt.jpg";
+import userIcon from "assets/imgs/user-icon.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,13 +11,13 @@ import {
   faMagnifyingGlass,
   faShoppingCart,
   faXmark,
-  faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
-import Button from "components/Button";
+
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "features/Login/loginSlice";
 import { showCart } from "features/ShoppingCart/shoppingcartSlice";
 import useScrollDirection from "components/hooks/useScrollDirection";
+import Register from "components/Register";
+import Login from "Login";
 
 const cx = classNames.bind(style);
 
@@ -29,6 +30,9 @@ const menuList = [
 function Header() {
   const [isMenuOpen, setisMenuOpen] = useState(false);
   const isLogin = useSelector((state) => state.login.isLogin);
+  const [toggleAction, setToggleAction] = useState(false);
+  const [isShowRegister, setIsShowRegister] = useState(false);
+  const [isShowLogin, setIsShowLogin] = useState(false);
   const [activePage, setActivePage] = useState("Home");
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(true);
@@ -53,16 +57,26 @@ function Header() {
     dispatch(showCart());
   };
 
-  const handleLogin = () => {
-    dispatch(login());
-  };
-
   //handle menu click
   const handleMenuClick = (page) => {
     if (isMenuOpen) {
       setisMenuOpen(false);
     }
     setActivePage(page);
+  };
+
+  //haddle set toggle avatar action
+  const haddleToggleAction = () => {
+    setToggleAction(!toggleAction);
+  };
+
+  const handleCloseRegister = (isShow) => {
+    setIsShowRegister(!isShow);
+    setToggleAction(false);
+  };
+  const handleCloseLogin = (isShow) => {
+    setIsShowLogin(!isShow);
+    setToggleAction(false);
   };
 
   return (
@@ -104,6 +118,7 @@ function Header() {
               >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               </Link>
+              <div className="search-container"></div>
             </li>
             {/* Shopping cart */}
 
@@ -121,6 +136,47 @@ function Header() {
                 </Link>
               </li>
             )}
+            {!isLogin && (
+              <li className={cx("customize_item")}>
+                <span
+                  className={cx("customize_Link")}
+                  onClick={haddleToggleAction}
+                >
+                  <img
+                    className={cx(
+                      "avt-img",
+                      toggleAction ? "avt-img_active" : ""
+                    )}
+                    src={userIcon}
+                    alt="avatar"
+                  />
+                </span>
+                {toggleAction && (
+                  <ul className={cx("user-dropdown")}>
+                    <li
+                      className={cx("user-dropdown-item")}
+                      onClick={() => setIsShowLogin(!isShowLogin)}
+                    >
+                      Login
+                    </li>
+                    <Login
+                      isShow={isShowLogin}
+                      handleClose={handleCloseLogin}
+                    />
+                    <li
+                      className={cx("user-dropdown-item")}
+                      onClick={() => setIsShowRegister(!isShowRegister)}
+                    >
+                      Register
+                    </li>
+                    <Register
+                      isShow={isShowRegister}
+                      handleClose={handleCloseRegister}
+                    />
+                  </ul>
+                )}
+              </li>
+            )}
           </ul>
           <div className={cx("toggle")} onClick={handleToggle}>
             {isMenuOpen ? (
@@ -129,11 +185,6 @@ function Header() {
               <FontAwesomeIcon icon={faBars} />
             )}
           </div>
-          {!isLogin && (
-            <Button primary onClick={handleLogin}>
-              <FontAwesomeIcon icon={faRightToBracket} /> &ensp; Login
-            </Button>
-          )}
         </div>
       </div>
     </div>

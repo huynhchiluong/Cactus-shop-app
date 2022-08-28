@@ -1,8 +1,16 @@
 .wrapper {
   background-color: #ccc;
   height: 3000px;
+  overflow-y: hidden;
 
   .carousel {
     height: calc((100vh) - var(--header-height));
+  }
+  .container {
+    .container-info {
+      .col {
+        background-color: #fff;
+      }
+    }
   }
 }
