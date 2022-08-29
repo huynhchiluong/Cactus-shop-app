@@ -3,21 +3,24 @@ const bodyParser = require('body-parser');
 const session = require('express-session')
 const passport = require('passport')
 const jwt = require('jsonwebtoken');
+var cors = require('cors')
 require('dotenv').config();
 require('./auth_google');
 const PORT =  process.env.PORT;
 const app = express();
 const db = require('./config/connect');
 const path = require('path')
+
 const authenticateToken = require('./middleware/auth')
 const routerUsers = require('./routes/users');
 const routerCategories = require('./routes/categories')
 const routerProducts = require('./routes/products')
 const routerImages = require('./routes/images');
+
 db.connect();
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine','ejs');
-
+app.use(cors())
 app.use('/images', express.static(path.join(__dirname, '/public/images')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -59,13 +62,15 @@ app.get('/',(req,res)=>{
     res.render('index')
 
 })
+app.get('/admin/products',(req,res)=>{
+    res.render('admin/products')
 
-
+})
 
 
 app.use('/api/users',routerUsers)
-app.use('/api/categories',authenticateToken,routerCategories)
-app.use('/api/products',authenticateToken,routerProducts)
+app.use('/api/categories',routerCategories)
+app.use('/api/products',routerProducts)
 app.use('/api/upload',routerImages)
 app.listen(PORT,(req,res)=>{
     console.log(`server is run  port: ${PORT}`)
