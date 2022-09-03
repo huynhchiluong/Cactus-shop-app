@@ -10,6 +10,7 @@ const PORT =  process.env.PORT;
 const app = express();
 const db = require('./config/connect');
 const path = require('path')
+const axios = require('axios')
 
 const authenticateToken = require('./middleware/auth')
 const routerUsers = require('./routes/users');
@@ -58,19 +59,23 @@ app.get('/auth/google/failure', (req, res) => {
 });
 */
 
-app.get('/',(req,res)=>{
+
+app.use('/forget',(req,res)=>{
+    res.render('forget')
+})
+app.use('/admin/products',(req,res)=>{
+    let productApi = axios.get('http://localhost:3000/api/categories/getall').then( response => res.json(response.data)).catch(err => console.error(err))
+    console.log('productApi la ',productApi)
+    res.render('admin/products',{products:productApi})
+
+})
+app.use('/',(req,res)=>{
     res.render('index')
-
 })
-app.get('/admin/products',(req,res)=>{
-    res.render('admin/products')
-
-})
-
 
 app.use('/api/users',routerUsers)
 app.use('/api/categories',routerCategories)
-app.use('/api/products',routerProducts)
+app.use('/api/products',authenticateToken,routerProducts)
 app.use('/api/upload',routerImages)
 app.listen(PORT,(req,res)=>{
     console.log(`server is run  port: ${PORT}`)

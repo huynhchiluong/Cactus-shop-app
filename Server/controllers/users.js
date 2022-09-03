@@ -2,30 +2,37 @@ const Users = require("../models/users")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const path = require('path')
-const upload = require("./utils/multer");
-const {cloudinary} = require("./utils/cloudinary");
+const upload = require("../utils/multer");
+const {cloudinary} = require("../utils/cloudinary");
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 module.exports = {
     insert: async function(req,res){
         try {
+            const result = await cloudinary.v2.uploader.upload(req.file.path,{folder:'catus', use_filename: true});
             const saltRounds = 10;
             var username = req.body.username;
             var password = req.body.password;
             const salt = bcrypt.genSaltSync(saltRounds);
             const has_password = bcrypt.hashSync(password, salt);
+            var firstname = req.body.firstname;
+            var lastname = req.body.lastname;
             var email = req.body.email;
             var phone = req.body.phone;
             var role = req.body.role;
-            var avatar = req.body.avatar;
+            var avatar = result.url;
+            console.log(`name: ${username}, password: ${password} ,email: ${email} ,phone: ${phone}, role:${role}, avatar: ${avatar}  `)
             const users = new Users ({
+                firstname : firstname, 
+                lastname : lastname,
                 username : username,
                 password : has_password,
                 email : email,
                 phone : phone,
                 role: role,
-                avatar: avatar
+                avatar: avatar,
             })
-            await users.save().then((doc) =>res.status(200).send(doc));
+            console.log(users)
+            await users.save().then((doc) =>res.render('home'));
         }catch(error){
             res.status(500).send(error);
         }
@@ -70,15 +77,16 @@ module.exports = {
         try {
             var username = req.body.username;
             var password = req.body.password;
-            var user = await Users.findOne({username:username})
+            // var user = await Users.findOne({username:username})
+            var user = await Users.findOne({$or:[{username:username},{email:password}]})
             if(user){
-                if(bcrypt.compareSync(password,user.password) == true){
-                    res.status(200).send('login successfull')
+                if( bcrypt.compareSync(password,user.password) == true){
+                    res.status(200).json({status:1})
                 }else{
-                    res.status(500).send('password is invalid')
+                    res.status(500).json({status:0,message:'Password is invalid'})
                 }
             }else{
-                res.status(500).send('user is not exists')
+                res.status(500).json({status:0,message:'User is not exists'})
             }
         } catch (error) {
             console.log(error)
@@ -87,7 +95,7 @@ module.exports = {
     index: async function(req,res){
         try {
             var users = await Users.find();
-            res.status(200).send(users);
+            res.status(200).json(users);
         } catch (error) {
             res.status(500).send(error);
         }
